@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerScreens from './components/DrawerScreens'
+// import AuthLoading from './screens/components/AuthLoading'
 
 
 export default class App extends React.Component {

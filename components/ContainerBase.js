@@ -1,6 +1,5 @@
 import React from 'react'
-import { Body, Container, Header, Left, Title, Right } from 'native-base';
-import { Button } from 'react-native';
+import { Body, Container, Header, Left, Title, Right, Icon } from 'native-base';
 
 export default class ContainerBase extends React.Component {
     render() {
@@ -8,9 +7,7 @@ export default class ContainerBase extends React.Component {
             <Container >
                 <Header iosBarStyle="light-content" style={{ backgroundColor: '#EA807C', zIndex: 999 }} androidStatusBarColor="#EA807C">
                     <Left>
-                        <Button
-                            title="Open"
-                            color="#ffffff"
+                        <Icon type="Ionicons" name="md-menu" style={{ color: "#ffffff" }}
                             onPress={() => this.props.navigation.toggleDrawer()}
                         />
                     </Left>
@@ -19,7 +16,7 @@ export default class ContainerBase extends React.Component {
                     </Body>
                     <Right />
                 </Header>
-                    {this.props.children}
+                {this.props.children}
             </Container>
         )
     }
