@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { WebView } from 'react-native-webview';
-import ContainerBase from '../components/ContainerBase'
+import ContainerBase from './components/ContainerBase'
 import Config from 'react-native-config'
-import { StyleSheet, ActivityIndicator, View } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, Alert } from 'react-native';
+import { withUserContext } from '../components/UserContext'
 
-export default class AboutScreen extends Component {
+
+class AboutScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,6 +43,8 @@ export default class AboutScreen extends Component {
         );
     }
 }
+
+export default withUserContext(AboutScreen)
 
 const styles = StyleSheet.create({
     WebViewStyle: {

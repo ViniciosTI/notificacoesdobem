@@ -5,7 +5,7 @@ import Resource from "./Rousource";
 export default class UserResource extends Resource{
 
     constructor(){
-        super()
+        super() 
     }
 
     newUser = async() =>{

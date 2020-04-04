@@ -3,6 +3,7 @@ import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Body, Container, Header, Left, Title, Icon, Right, Text } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import Category from './components/settings/Category';
+import { withUserContext } from '../components/UserContext'
 
 // import Spinner from 'react-native-loading-spinner-overlay';
 import UserResource from '../resources/UserResource';
@@ -173,4 +174,4 @@ class Morning extends Component {
 
 
 
-export default Morning;
+export default withUserContext(Morning);

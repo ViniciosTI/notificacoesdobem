@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { ScrollView, Image, TouchableOpacity } from 'react-native';
-import ContainerBase from '../components/ContainerBase'
+import ContainerBase from './components/ContainerBase'
 import { Text, View, Card } from 'native-base';
 import * as Animatable from 'react-native-animatable';
+import { withUserContext } from '../components/UserContext'
+
 
 AnimatedCard = Animatable.createAnimatableComponent(Card);
 
@@ -56,4 +58,4 @@ class Setting extends Component {
     )
   }
 }
-export default Setting;
+export default withUserContext(Setting);

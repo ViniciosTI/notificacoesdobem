@@ -7,6 +7,10 @@ import About from '../screens/about'
 import Night from '../screens/night'
 import Afternoon from '../screens/afternoon'
 import Morning from '../screens/morning'
+import AuthLoading from '../screens/authLoading'
+import NoNetwork from '../screens/noNetwork'
+import App from '../App';
+
 
 import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Icon, Text } from 'native-base';
@@ -48,7 +52,10 @@ export default class DrawerScreens extends React.Component {
     render() {
         return (
             <>
-                <Drawer.Navigator drawerContent={props => MenuScreen(props)} initialRouteName="Home">
+                <Drawer.Navigator drawerContent={props => MenuScreen(props)} initialRouteName="Loading">
+                    <Drawer.Screen name="Loading" component={AuthLoading} />
+                    <Drawer.Screen name="Nonet" component={NoNetwork} />
+                    <Drawer.Screen name="App" component={App} />
                     <Drawer.Screen name="Home" component={Home} />
                     <Drawer.Screen name="Settings" component={Settings} />
                     <Drawer.Screen name="About" component={About} />
