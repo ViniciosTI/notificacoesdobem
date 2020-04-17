@@ -1,12 +1,15 @@
-package com.novoprojeto;
+package com.notificacoesdobem.br;
 
 import android.app.Application;
 import android.content.Context;
+
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import fr.greweb.reactnativeviewshot.RNViewShotPackage;
-import io.invertase.firebase.RNFirebasePackage;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.riwu.notification.open.OpenNotificationPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -16,7 +19,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends MultiDexApplication implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -39,7 +42,11 @@ public class MainApplication extends Application implements ReactApplication {
           return "index";
         }
       };
-
+  @Override
+  protected void attachBaseContext(Context newBase) {
+      super.attachBaseContext(newBase);
+      MultiDex.install(this);
+  }
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
@@ -50,6 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+
   }
 
   /**

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {
   AsyncStorage
-} from 'react-native';import firebase from 'react-native-firebase';
+} from 'react-native';
 
 const UserContext = React.createContext();
-
-const AdRequest = firebase.admob.AdRequest;
 
 class UserProvider extends Component {
 
@@ -47,17 +45,24 @@ class UserProvider extends Component {
     await AsyncStorage.setItem('user', JSON.stringify(this.state));
   }
 
+  setImagePath = async (imagePath) => {
+    console.log(imagePath)
+    await this.setState({
+      imagePath: imagePath
+    })
+    await AsyncStorage.setItem('user', JSON.stringify(this.state));
+  }
 
   render() {
     return (
       <UserContext.Provider value={{
         user: this.state,
-        adMobRequest: new AdRequest(),
         setPushToken: this.setPushToken,
         setUuid: this.setUuid,
         refreshSateWithDataBase: this.refreshSateWithDataBase,
         setUser: this.setUser,
-        setMessage: this.setMessage
+        setMessage: this.setMessage,
+        setImagePath: this.setImagePath
       }}>
         {this.props.children}
       </UserContext.Provider>

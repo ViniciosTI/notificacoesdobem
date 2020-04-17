@@ -10,20 +10,23 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-// #import <Firebase.h>
-// #import "RNFirebaseNotifications.h"
+#import <Firebase.h>
 
+@import Firebase;
+@import GoogleMobileAds;
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    [FIRApp configure];
+  [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
+
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"novoProjeto"
+                                                   moduleName:@"Notificacoesdobem"
                                             initialProperties:nil];
-  // [FIRApp configure];
-  // [RNFirebaseNotifications configure];
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
@@ -32,7 +35,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-
+  
+  
   return YES;
 }
 
@@ -44,10 +48,6 @@
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
-
-// - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-//   [[RNFirebaseNotifications instance] didReceiveLocalNotification:notification];
-// }
 
 @end
 

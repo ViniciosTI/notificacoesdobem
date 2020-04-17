@@ -7,7 +7,6 @@ import { withUserContext } from '../components/UserContext'
 
 // import Spinner from 'react-native-loading-spinner-overlay';
 import UserResource from '../resources/UserResource';
-import { AndroidBackHandler } from 'react-navigation-backhandler';
 
 const mainColor = '#F7DF86'
 const textColor = 'black'
@@ -83,9 +82,6 @@ class Afternoon extends Component {
         this.resource.postCategories(this.props.userContext.user.uuid, period, selected)
 
     }
-    onBackButtonPressAndroid = () => {
-        this.updateCategories();
-    };
 
     renderList() {
         // if(!this.state.showList){
@@ -144,29 +140,27 @@ class Afternoon extends Component {
 
     render() {
         return (
-            <AndroidBackHandler onBackPress={this.onBackButtonPressAndroid}>
-                <Container>
-                    {/* <Spinner
+            <Container>
+                {/* <Spinner
           visible={this.state.loading}
           overlayColor={mainColor}
           textContent={'carregando...'}
           textStyle={{ color: 'white', backgroundColor: mainColor }}
         /> */}
-                    <Header style={styles.header} androidStatusBarColor={mainColor}>
-                        <Left>
-                            <Icon onPress={() => this.goBack()} type="FontAwesome" name="angle-left" style={styles.backBtn} />
-                        </Left>
-                        <Body>
-                            <Title style={styles.title}>{this.state.title}</Title>
-                        </Body>
-                        <Right />
-                    </Header>
+                <Header style={styles.header} androidStatusBarColor={mainColor}>
+                    <Left>
+                        <Icon onPress={() => this.goBack()} type="FontAwesome" name="angle-left" style={styles.backBtn} />
+                    </Left>
+                    <Body>
+                        <Title style={styles.title}>{this.state.title}</Title>
+                    </Body>
+                    <Right />
+                </Header>
 
-                    <View style={styles.content}>
-                        {this.renderList()}
-                    </View>
-                </Container>
-            </AndroidBackHandler>
+                <View style={styles.content}>
+                    {this.renderList()}
+                </View>
+            </Container>
         );
     }
 }

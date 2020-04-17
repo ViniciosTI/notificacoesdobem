@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
-
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply plugin: 'com.google.gms.google-services'
 import com.android.build.OutputFile
 
 /**
@@ -120,6 +121,7 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -128,11 +130,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.novoprojeto"
+        applicationId "com.notificacoesdobem.br"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -178,16 +181,24 @@ android {
     }
 }
 
+
+
 dependencies {
-    implementation project(':react-native-view-shot')
-    implementation project(':react-native-firebase')
-    implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-open-notification')
     implementation project(':react-native-webview')
     implementation project(':react-native-config')
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'androidx.appcompat:appcompat:1.0.2'
 
+    implementation 'com.google.android.gms:play-services-base:17.2.1'
+    implementation 'com.google.android.gms:play-services-ads:19.0.1'
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-ads:18.0.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
+    def multidex_version = "2.0.1"
+    implementation 'androidx.multidex:multidex:$multidex_version'
+    
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")

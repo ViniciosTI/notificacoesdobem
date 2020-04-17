@@ -14,11 +14,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface novoProjetoTests : XCTestCase
+@interface NotificacoesdobemTests : XCTestCase
 
 @end
 
-@implementation novoProjetoTests
+@implementation NotificacoesdobemTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

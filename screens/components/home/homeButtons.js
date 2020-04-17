@@ -1,16 +1,21 @@
-import React, {Component} from 'react';
-import { View, Text, Clipboard, Share, Alert} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Clipboard, Alert } from 'react-native';
 import { Icon } from 'native-base';
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
+import { withUserContext } from '../../../components/UserContext'
+import RNFetchBlob from 'rn-fetch-blob'
+import Share from 'react-native-share';
+import messaging from '@react-native-firebase/messaging';
 
 
-export default class HomeButtonsAction extends Component {
+class HomeButtonsAction extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '\"' + props.phrase + '\" - ' + props.author
+      message: '\"' + props.phrase + '\" - @' + props.author
     };
   }
+
   writeToClipboard = async () => {
     await Clipboard.setString(this.state.message);
     showMessage({
@@ -25,30 +30,34 @@ export default class HomeButtonsAction extends Component {
       [
         {
           text: 'Compartilhar como texto', onPress: async () => {
+            
             try {
-              await Share.share({
+              await Share.open({
                 message:
                   this.state.message,
               });
             } catch (error) {
-              alert(error.message);
+              // alert(error.message);
             }
           }
         },
         {
           text: 'Compartilhar como imagem', onPress: async () => {
-            console.log(this.refs)
-            this.refs.sentence.capture().then(uri => {
-              console.log("do something with ", uri);
-            });
-            try {
-              await Share.share({
-                message:
-                  this.state.message,
-              });
-            } catch (error) {
-              alert(error.message);
-            }
+            const fs = RNFetchBlob.fs;
+            fs.readFile(this.props.userContext.user.imagePath, 'base64')
+              .then(async data => {
+                  
+                  const shareOptions = {
+                    
+                    url: 'data:image/png;base64,'+data,
+                  };
+                  try {
+                    await Share.open(shareOptions);
+                    await RNFS.unlink(this.props.userContext.user.imagePath);
+                  } catch (error) {
+                    // alert(error.message);
+                  }
+              })
           }
         },
         { text: 'Cancelar', onPress: () => console.log('Cancel') },
@@ -56,8 +65,9 @@ export default class HomeButtonsAction extends Component {
       { cancelable: false }
     )
   };
-  render() {
+  render() { 
     return (
+      <>
       <View>
         <View style={{ height: 50, flexDirection: 'row', paddingHorizontal: 15 }}>
           <View>
@@ -70,9 +80,10 @@ export default class HomeButtonsAction extends Component {
           </View>
         </View>
       </View>
+      </>
     );
   }
 }
 
-
+export default withUserContext(HomeButtonsAction)
 

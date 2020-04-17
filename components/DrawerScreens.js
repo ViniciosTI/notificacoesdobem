@@ -11,7 +11,6 @@ import AuthLoading from '../screens/authLoading'
 import NoNetwork from '../screens/noNetwork'
 import App from '../App';
 
-
 import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Icon, Text } from 'native-base';
 

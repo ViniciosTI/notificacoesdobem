@@ -5,11 +5,10 @@ import Permissions from 'react-native-permissions'
 import AndroidOpenSettings from 'react-native-android-open-settings'
 
 import { withUserContext } from '../components/UserContext'
-import firebase from 'react-native-firebase';
 import { Text } from 'native-base';
+import messaging from '@react-native-firebase/messaging';
 
 import UserResource from '../resources/UserResource';
-
 
 class AuthLoading extends Component {
   constructor(props) {
@@ -58,12 +57,17 @@ class AuthLoading extends Component {
       this.props.navigation.navigate('Nonet');
       return;
     }
-
+    try {
+      this.registerAppWithFCM()
+    } catch (e) {
+      return;
+    }
     await this._pushNotification()
-
+    
     await this.resource.postPushToken(this.props.userContext.user.uuid, this.props.userContext.user.pushToken)
-
+    
     await this._getMessage()
+    
 
     this.props.navigation.navigate('Home');
   };
@@ -73,9 +77,11 @@ class AuthLoading extends Component {
     let response = await this.resource.getNotification(this.props.userContext.user.uuid)
     await this.props.userContext.setMessage(response)
 
-
   }
-
+     
+  registerAppWithFCM = async () => {
+    await messaging().registerDeviceForRemoteMessages();
+  }
 
   _insistPermissioniOS = async () => {
     Alert.alert(
@@ -98,7 +104,7 @@ class AuthLoading extends Component {
         {
           text: '🤙 Com certeza!', onPress: async () => {
             try {
-              await firebase.messaging().requestPermission()
+              await messaging().requestPermission()
               if (Platform.OS !== 'ios') {
                 AndroidOpenSettings.appNotificationSettings()
               }
@@ -121,7 +127,7 @@ class AuthLoading extends Component {
 
   _getPushToken = async () => {
     try {
-      let token = await firebase.messaging().getToken()
+      let token = await messaging().getToken()
       if (token !== this.props.userContext.pushToken) {
         this.props.userContext.setPushToken(token)
       }
@@ -143,7 +149,7 @@ class AuthLoading extends Component {
   }
 
   _getPermissionAndroid = async () => {
-    if (! await firebase.messaging().hasPermission()) {
+    if (! await messaging().hasPermission()) {
       await this._requestPermission()
     }
 

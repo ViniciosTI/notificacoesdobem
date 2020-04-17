@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { WebView } from 'react-native-webview';
 import ContainerBase from './components/ContainerBase'
 import Config from 'react-native-config'
-import { StyleSheet, ActivityIndicator, View, Alert } from 'react-native';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 import { withUserContext } from '../components/UserContext'
 
 

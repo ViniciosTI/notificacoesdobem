@@ -7,7 +7,6 @@ import { withUserContext } from '../components/UserContext'
 
 // import Spinner from 'react-native-loading-spinner-overlay';
 import UserResource from '../resources/UserResource';
-import { AndroidBackHandler } from 'react-navigation-backhandler';
 
 const mainColor = '#EA807C'
 const textColor = 'white'
@@ -22,13 +21,13 @@ const styles = StyleSheet.create({
     header: { backgroundColor: mainColor },
     backBtn: { color: textColor, marginRight: 15, marginLeft: 5 },
     title: { fontSize: 20, fontFamily: 'Lato-Regular', color: textColor },
-    content: {flex: 1, backgroundColor: mainColor, color: textColor },
+    content: { flex: 1, backgroundColor: mainColor, color: textColor },
     h1: { fontSize: 20, fontFamily: 'Lato-Regular', color: textColor },
     container: { padding: 30, flex: 1 },
     description: { fontSize: 15, marginTop: 10, fontFamily: 'Lato-Regular', color: textColor },
     scroll: { marginTop: 20, flexGrow: 1 }
 
-});
+}); 
 
 class Morning extends Component {
     constructor(props) {
@@ -55,7 +54,7 @@ class Morning extends Component {
     async componentDidMount() {
         // const advert = firebase.admob().interstitial('ca-app-pub-3940256099942544/1033173712')
         // advert.loadAd(this.props.userContext.adMobRequest.build());
-        
+
         let response = await this.resource.getCategories(this.props.userContext.user.uuid, period)
         this.setState({
             ...this.state,
@@ -74,21 +73,19 @@ class Morning extends Component {
         //     })
         // }, 1000);
 
-        
+
     }
 
-    updateCategories(){
+    updateCategories() {
         let selected = this.state.categories.filter((category) => {
             return category.selected
         })
         this.resource.postCategories(this.props.userContext.user.uuid, period, selected)
 
     }
-    onBackButtonPressAndroid = () => {
-        this.updateCategories();
-    };
 
-    renderList(){
+
+    renderList() {
         // if(!this.state.showList){
         //     return (
         //         <View style={{flex:1,justifyContent:'center',alignContent: 'center',}}>
@@ -107,7 +104,7 @@ class Morning extends Component {
             </ScrollView>
         </View>)
     }
-    
+
 
     onSelectCategory(categoryPressed) {
 
@@ -144,9 +141,8 @@ class Morning extends Component {
 
     render() {
         return (
-            <AndroidBackHandler onBackPress={this.onBackButtonPressAndroid}>
             <Container>
-                
+
                 {/* <Spinner
                     visible={this.state.loading}
                     overlayColor={mainColor}
@@ -167,7 +163,6 @@ class Morning extends Component {
                     {this.renderList()}
                 </View>
             </Container>
-            </AndroidBackHandler>
         );
     }
 }

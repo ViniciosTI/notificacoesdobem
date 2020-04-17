@@ -12,7 +12,7 @@ export default class UserResource extends Resource{
         return await this._get('app/new?platform=' + Platform.OS)
     }
 
-    postTouch = async (uuid) => {
+    postTouch = async (uuid) => { 
         return this._post('app/' + uuid+'/touch')
     }
 

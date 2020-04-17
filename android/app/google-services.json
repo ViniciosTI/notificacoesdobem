@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "167729436709",
+    "firebase_url": "https://notificacoes-do-bem.firebaseio.com",
+    "project_id": "notificacoes-do-bem",
+    "storage_bucket": "notificacoes-do-bem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167729436709:android:0546ebed46b9cb30",
+        "android_client_info": {
+          "package_name": "com.notificacoesdobem.br"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167729436709-gknjfm22oathbja0m56lt2usicc4p2i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAou1wxMXiw86OTN0kB5INa9R5N5BJZPEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167729436709-gknjfm22oathbja0m56lt2usicc4p2i3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "167729436709-0tb88uagpc5t4a5f3au6qv1s31jkpksr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thiagovictorino.notificacoesdobem"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

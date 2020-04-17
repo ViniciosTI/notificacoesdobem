@@ -5,7 +5,9 @@
 .DS_Store
 
 # Xcode
-#
+#         "react-native-firebase": "^5.6.0",
+
+
 build/
 *.pbxuser
 !default.pbxuser

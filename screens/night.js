@@ -7,7 +7,6 @@ import { withUserContext } from '../components/UserContext'
 
 // import Spinner from 'react-native-loading-spinner-overlay';
 import UserResource from '../resources/UserResource';
-import { AndroidBackHandler } from 'react-navigation-backhandler';
 
 const mainColor = '#7C87C7'
 const textColor = 'white'
@@ -83,9 +82,6 @@ class Night extends Component {
     this.resource.postCategories(this.props.userContext.user.uuid, period, selected)
 
   }
-  onBackButtonPressAndroid = () => {
-    this.updateCategories();
-  };
 
   renderList() {
     // if(!this.state.showList){
@@ -144,7 +140,6 @@ class Night extends Component {
 
   render() {
     return (
-      <AndroidBackHandler onBackPress={this.onBackButtonPressAndroid}>
       <Container>
         {/* <Spinner
           visible={this.state.loading}
@@ -166,7 +161,6 @@ class Night extends Component {
           {this.renderList()}
         </View>
       </Container>
-      </AndroidBackHandler>
     );
   }
 }
