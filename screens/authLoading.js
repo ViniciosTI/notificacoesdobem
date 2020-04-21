@@ -57,18 +57,13 @@ class AuthLoading extends Component {
       this.props.navigation.navigate('Nonet');
       return;
     }
-    try {
-      this.registerAppWithFCM()
-    } catch (e) {
-      return;
-    }
+    
     await this._pushNotification()
     
     await this.resource.postPushToken(this.props.userContext.user.uuid, this.props.userContext.user.pushToken)
     
     await this._getMessage()
     
-
     this.props.navigation.navigate('Home');
   };
 
@@ -77,10 +72,6 @@ class AuthLoading extends Component {
     let response = await this.resource.getNotification(this.props.userContext.user.uuid)
     await this.props.userContext.setMessage(response)
 
-  }
-     
-  registerAppWithFCM = async () => {
-    await messaging().registerDeviceForRemoteMessages();
   }
 
   _insistPermissioniOS = async () => {
